@@ -155,3 +155,10 @@ button {
     width: var(--card-width-mobile);
   }
 }
+
+
+.teesting {
+  color: black;
+  font-weight: bolder;
+  font-size: x-large;
+}
