@@ -9,6 +9,7 @@ const Card = ({ image, selected, onClick }) => {
           alt=''
           src={'/assets/popcorn.png'}
           className='card-back'
+          onClick={onClick}
         />
       </div>
     </div>
