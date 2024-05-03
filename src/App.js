@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+
 import shuffle from "./utilities/shuffle";
+
 import Card from "./compoenents/Card";
+import Header from "./compoenents/Header";
 
 function App() {
   const [cards, setCards] = useState(shuffle);
@@ -22,6 +25,13 @@ function App() {
     setPickOne(null);
     setPickTwo(null);
     setDisabled(false);
+  };
+
+  // Start Over
+  const handleNewGame = () => {
+    setWins(0);
+    handleTurn();
+    setCards(shuffle);
   };
 
   // Used for selection and match handling
@@ -59,7 +69,6 @@ function App() {
 
 
   //if Player has found all matches , handle accordingly
-
   useEffect(() => {
     // Check for any remain matches
     const checkWin = cards.filter((card) => !card.matched);
@@ -75,6 +84,8 @@ function App() {
 
   return (
     <>
+      <Header handleNewGame={handleNewGame} wins={wins} />
+
       <div className="grid">
         {cards.map((card) => {
           const { image, id, matched } = card;
