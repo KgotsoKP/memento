@@ -6,12 +6,15 @@ import shuffle from "./utilities/shuffle";
 import Card from "./compoenents/Card";
 import Header from "./compoenents/Header";
 
+import useAppBadge from "./hooks/useAppBadge";
+
 function App() {
   const [cards, setCards] = useState(shuffle);
   const [pickOne, setPickOne] = useState(null);
   const [pickTwo, setPickTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [wins, setWins] = useState(0);
+  const [setBadge, clearBadge] = useAppBadge();
 
   //Handle card selection
   const handleClick = (card) => {
@@ -29,6 +32,7 @@ function App() {
 
   // Start Over
   const handleNewGame = () => {
+    clearBadge();
     setWins(0);
     handleTurn();
     setCards(shuffle);
@@ -74,10 +78,11 @@ function App() {
     const checkWin = cards.filter((card) => !card.matched);
 
     // All matches made, handel win/badge counters
-    if (cards.length && checkWin.leength < 1) {
+    if (cards.length && checkWin.length < 1) {
       console.log('You Won');
       setWins(wins + 1);
       handleTurn();
+      setBadge();
       setCards(shuffle);
     }
   }, [cards, wins]);
